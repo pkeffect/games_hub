@@ -1,8 +1,0 @@
-const SPEED = 8;
-const SCORE_PER_ENEMY = 10;
-
-const GAME_WIDTH = 800;
-const SPACING = 20;
-const GRAVITY_FORCE = 0.2;
-
-export { SPEED, SPACING, SCORE_PER_ENEMY, GRAVITY_FORCE , GAME_WIDTH };
