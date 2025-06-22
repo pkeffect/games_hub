@@ -1,0 +1,186 @@
+/* RESET */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+::selection {
+    background: transparent;
+    color: inherit;
+}
+
+/* VARIABLES */
+:root {
+    --base-spacing: 1rem;
+    --c-notebook-page: #e4e1cc;
+    --c-ink: #0c3560;
+    --c-red-ink: #bd2222;
+    --c-transparent-ink: rgb(12 53 96 / 20%);
+    --text-color: var(--c-ink);
+    --c-desk-green: #67e0a6;
+    --c-green: #00c853;
+}
+
+/* UTILITIES */
+.hidden {
+    display: none !important;
+}
+
+/* MAIN */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Press Start 2P", cursive;
+    height: 100vh;
+    background-color: var(--c-desk-green);
+    touch-action: none;
+}
+
+.top-gui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--base-spacing);
+    color: var(--text-color);
+}
+
+.bottom-gui {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--base-spacing);
+    color: var(--text-color);
+}
+
+.header {
+    font-size: 2rem;
+    max-width: 250px;
+    line-height: 1.25;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.menu-container {
+    margin-top: calc(var(--base-spacing) * 2);
+}
+
+.main-gui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.button {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    padding: calc(var(--base-spacing) / 2);
+    margin-top: var(--base-spacing);
+    font-family: "Press Start 2P", cursive;
+    font-size: 1rem;
+    color: var(--text-color);
+    border-bottom: 2px solid transparent;
+}
+
+.button:hover,
+.button:focus,
+.button:active {
+    border-color: var(--text-color);
+}
+
+.slider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--base-spacing);
+}
+
+.coffee-container {
+    position: absolute;
+    bottom: var(--base-spacing);
+    right: var(--base-spacing);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--base-spacing);
+    opacity: 0.2;
+}
+
+.coffee-container:hover {
+    opacity: 1;
+}
+
+.credits-text {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.credits-link {
+    color: var(--text-color);
+}
+
+input[type="range"] {
+    accent-color: var(--text-color);
+}
+
+.canvas {
+    position: relative;
+    background-color: var(--c-notebook-page);
+    border: 1px solid var(--c-transparent-ink);
+    background-size:
+        40px 40px,
+        40px 40px,
+        1px 100%;
+    background-image:
+        linear-gradient(to right, var(--c-transparent-ink) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--c-transparent-ink) 1px, transparent 1px),
+        linear-gradient(to right, var(--c-transparent-ink) 1px, transparent 1px);
+    background-position:
+        0 0,
+        0 0,
+        80px 0;
+    background-repeat:
+        repeat,
+        repeat,
+        no-repeat;
+}
+
+@media (min-width: 600px) {
+    .header {
+        font-size: 4rem;
+        max-width: 500px;
+    }
+}

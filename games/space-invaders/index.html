@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Space Invaders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <canvas data-canvas></canvas>
+        <div class="game-gui hidden" data-game-GUI>
+            <div class="top-gui">
+                <div class="score">Score: <span data-score>0</span></div>
+                <div class="lives">Lives: <span data-lives></span></div>
+            </div>
+            <div class="bottom-gui">
+                <div class="level">Level: <span data-level></span></div>
+            </div>
+        </div>
+        <div class="start-gui main-gui hidden" data-start-GUI>
+            <div>
+                <h1 class="header" width="100">Space Invaders</h1>
+                <div class="menu-container">
+                    <button class="button" data-start-button>Start</button>
+                    <button class="button" data-options-button>Options</button>
+                    <button class="button" data-highscore-button>Highscore</button>
+                    <button class="button" data-credits-button>Credits</button>
+                </div>
+                <div class="coffee-container">
+                    <script src="https://pmanikas.github.io/pmanikas/scripts/buy-me-coffee-button-8bit.js"></script>
+                </div>
+            </div>
+        </div>
+        <div class="pause-gui main-gui hidden" data-pause-GUI>
+            <div>
+                <h1 class="header">Paused</h1>
+                <div class="menu-container">
+                    <button class="button" data-resume-button>Resume</button>
+                    <button class="button" data-start-button>Restart</button>
+                    <button class="button" data-exit-button>Exit</button>
+                </div>
+                <div class="coffee-container">
+                    <script src="https://pmanikas.github.io/pmanikas/scripts/buy-me-coffee-button-8bit.js"></script>
+                </div>
+            </div>
+        </div>
+        <div class="credits-gui main-gui hidden" data-credits-GUI>
+            <div>
+                <h1 class="header">Credits</h1>
+                <div class="menu-container">
+                    <p class="credits-text">Created by <a class="credits-link" href="https://pantelismanikas.com" target="_blank">Pantelis Manikas</a>
+                        <script src="https://pmanikas.github.io/pmanikas/scripts/github-button-8bit.js"></script>
+                    </p>
+                    <button class="button" data-back-button>Back</button>
+                </div>
+                <div class="coffee-container">
+                    <script src="https://pmanikas.github.io/pmanikas/scripts/buy-me-coffee-button-8bit.js"></script>
+                </div>
+            </div>
+        </div>
+        <div class="game-over-gui main-gui hidden" data-game-over-GUI>
+            <div>
+                <h1 class="header">Game Over</h1>
+                <div class="menu-container">
+                    <button class="button" data-play-again-button>Play Again</button>
+                    <button class="button" data-exit-button>Main Menu</button>
+                </div>
+                <div class="coffee-container">
+                    <script src="https://pmanikas.github.io/pmanikas/scripts/buy-me-coffee-button-8bit.js"></script>
+                </div>
+            </div>
+        </div>
+        <div class="options-gui main-gui hidden" data-options-GUI>
+            <div>
+                <h1 class="header">Options</h1>
+                <div class="menu-container">
+                    <div class="volume-control">
+                        <label for="music-volume">Music</label>
+                        <input class="slider" data-music-volume-slider type="range" id="music-volume" name="music-volume" min="0" max="1" step="0.1" value="0.5">
+                    </div>
+                    <br>
+                    <div class="volume-control">
+                        <label for="sfx-volume">SFX</label>
+                        <input class="slider" data-sfx-volume-slider type="range" id="sfx-volume" name="sfx-volume" min="0" max="1" step="0.1" value="0.5">
+                    </div>
+                    <button class="button" data-back-button>Back</button>
+                </div>
+                <div class="coffee-container">
+                    <script src="https://pmanikas.github.io/pmanikas/scripts/buy-me-coffee-button-8bit.js"></script>
+                </div>
+            </div>
+        </div>
+        <div class="highscore-gui main-gui hidden" data-highscore-GUI>
+            <div>
+                <h1 class="header">Highscore</h1>
+                <div class="menu-container">
+                    <p>Highest: <span data-highscore>0</span></p>
+                    <p>Latest: <span data-latest-score>0</span></p>
+                    <button class="button" data-clear-score-button>Reset Score</button>
+                    <button class="button" data-back-button>Back</button>
+
+                </div>
+                <div class="coffee-container">
+                    <script src="https://pmanikas.github.io/pmanikas/scripts/buy-me-coffee-button-8bit.js"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>

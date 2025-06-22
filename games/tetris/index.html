@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tetris - Pantelis Manikas Retro Games</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="screen">
+                <div class="left">
+                    <canvas class="canvas" data-canvas data-view="play"></canvas>
+                    <div class="view play" hidden data-view="play"></div>
+                    <div class="view menu hidden" data-view="menu">
+                        <div class="view-content">
+                            <h1 class="header">Tetris</h1>
+                            <button
+                                class="button"
+                                data-button="play"
+                                data-action="play"
+                            >
+                                Start
+                            </button>
+                            <button class="button" data-button="settings">
+                                Settings
+                            </button>
+                            <button class="button" data-button="highscore">
+                                Highscore
+                            </button>
+                            <button class="button" data-button="credits">
+                                Credits
+                            </button>
+                        </div>
+                    </div>
+                    <div class="view pause hidden" data-view="pause">
+                        <div class="view-content">
+                            <h1 class="header">Pause</h1>
+                            <button class="button" data-action="pause">
+                                Resume
+                            </button>
+                            <button class="button" data-action="restart">
+                                Restart
+                            </button>
+                            <button class="button" data-action="menu">
+                                Main Menu
+                            </button>
+                        </div>
+                    </div>
+                    <div class="view gameover hidden" data-view="gameover">
+                        <div class="view-content">
+                            <h1 class="header">Game Over</h1>
+                            <button class="button" data-action="restart">
+                                Restart
+                            </button>
+                            <button class="button" data-action="menu">
+                                Main Menu
+                            </button>
+                        </div>
+                    </div>
+                    <div class="view settings hidden" data-view="settings">
+                        <div class="view-content">
+                            <h1 class="header">Settings</h1>
+                            <div class="options">
+                                <div class="volume-options">
+                                    <div class="music-volume">
+                                        <p>Music</p>
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="1"
+                                            step="0.1"
+                                            value="0.5"
+                                            data-input-music-volume
+                                        />
+                                    </div>
+                                    <div class="sfx-volume">
+                                        <p>SFX</p>
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="1"
+                                            step="0.1"
+                                            value="0.5"
+                                            data-input-sfx-volume
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="button" data-action="menu">
+                                ⬅︎ Back
+                            </button>
+                        </div>
+                    </div>
+                    <div class="view credits hidden" data-view="credits">
+                        <div class="view-content">
+                            <h1 class="header">Credits</h1>
+                            <p class="text">Created by <a class="link" target="_blank" href="https://pantelismanikas.com">Pantelis Manikas</a></p>
+                            <div class="soc">
+                                <script src="https://pmanikas.github.io/pmanikas/scripts/github-button-8bit.js"></script>
+                            </div>
+                            <button class="button" data-action="menu">
+                                ⬅︎ Back
+                            </button>
+                        </div>
+                    </div>
+                    <div class="view highscore hidden" data-view="highscore">
+                        <div class="view-content">
+                            <h1 class="header">Highscore</h1>
+                            <p class="text">Latest: <span data-text-latest-score>0</span></p>
+                            <p class="text">Highest: <span data-text-highscore>0</span></p>
+                            <button class="button" data-action="resetScore">
+                                Reset
+                            </button>
+                            <button class="button" data-action="menu">
+                                ⬅︎ Back
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="next-tile">
+                        <p>Next tile:</p>
+                        <div class="next-tile-container">
+                            <canvas class="preview-canvas" data-preview-next-canvas></canvas>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <p>Controls:</p>
+                        <ul>
+                            <li>Move left: ←</li>
+                            <li>Move right: →</li>
+                            <li>Rotate: ↑</li>
+                            <li>Soft drop: ↓</li>
+                            <li>Hard drop: Space</li>
+                            <li>Pause: P</li>
+                        </ul>
+                    </div>
+                    <div class="score">
+                        <div>Score: <span data-text-current-score>0</span></div>
+                        <div>Highscore: <span data-text-highscore>0</span></div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="don">
+                    <script src="https://pmanikas.github.io/pmanikas/scripts/buy-me-coffee-button-8bit.js"></script>
+                </div>
+            </footer>
+        </div>
+        <script type="module" src="main.js"></script>
+    </body>
+</html>

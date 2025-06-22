@@ -1,0 +1,132 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --base-spacing: 0.75rem;
+    --base-radius: 8px;
+    --base-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+    --light: #f5f5f5;
+    --ultra-light: #fff;
+    --background: #241434;
+    --text-color: #333;
+    --primary-color: #4e0f89;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+    font-family: "Press Start 2P", cursive;
+    background-color: #241434;
+}
+
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    padding: var(--base-spacing);
+    text-align: center;
+}
+
+.header {
+    margin-bottom: calc(var(--base-spacing) * 2);
+    color: var(--light);
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--base-spacing);
+    width: 100%;
+    max-width: 800px;
+    padding: 0;
+    list-style: none;
+}
+
+.image-container {
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--light);
+    border-radius: var(--base-radius);
+    box-shadow: var(--base-shadow);
+    border: 1px solid var(--light);
+    overflow: hidden;
+}
+
+.item:hover {
+    background-color: var(--ultra-light);
+}
+
+.item:hover .image {
+    transform: scale(1.25);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--base-spacing);
+    justify-content: center;
+    align-items: center;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--base-spacing);
+    width: 100%;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.title {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.description {
+    font-size: 0.9rem;
+}
+
+.info {
+    flex: 1;
+    text-align: left;
+    width: 500px;
+    max-width: 100%;
+}
+
+
+@media screen and (min-width: 768px) {
+    --base-spacing: 1.5rem;
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .description {
+        margin-top: var(--base-spacing);
+    }
+}

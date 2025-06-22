@@ -1,0 +1,58 @@
+{
+    "games": {
+        "demo_instructions": {
+            "name": "🎮 Add Games Here",
+            "description": "Drop HTML5 games into the games/ directory. Each game needs an index.html file.",
+            "category": "Instructions",
+            "icon": "📁",
+            "difficulty": "Info",
+            "file": "",
+            "controls": [
+                "See individual game instructions"
+            ],
+            "features": [
+                "Plug-and-play system",
+                "TypeScript support",
+                "Retro theme"
+            ]
+        }
+    },
+    "categories": {
+        "Arcade": {
+            "icon": "🕹️",
+            "color": "#dc2626"
+        },
+        "Puzzle": {
+            "icon": "🧩",
+            "color": "#7c3aed"
+        },
+        "Sports": {
+            "icon": "⚽",
+            "color": "#059669"
+        },
+        "Platform": {
+            "icon": "🦘",
+            "color": "#ea580c"
+        },
+        "Adventure": {
+            "icon": "🗺️",
+            "color": "#0891b2"
+        },
+        "Racing": {
+            "icon": "🏎️",
+            "color": "#c2410c"
+        },
+        "Instructions": {
+            "icon": "📚",
+            "color": "#6b7280"
+        }
+    },
+    "ui_settings": {
+        "show_difficulty": true,
+        "show_categories": true,
+        "show_controls": true,
+        "grid_columns": 3,
+        "card_animation": true,
+        "ultra_dark_theme": true
+    }
+}
