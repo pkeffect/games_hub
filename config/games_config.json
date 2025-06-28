@@ -1,58 +1,213 @@
 {
-    "games": {
-        "demo_instructions": {
-            "name": "🎮 Add Games Here",
-            "description": "Drop HTML5 games into the games/ directory. Each game needs an index.html file.",
-            "category": "Instructions",
-            "icon": "📁",
-            "difficulty": "Info",
-            "file": "",
-            "controls": [
-                "See individual game instructions"
-            ],
-            "features": [
-                "Plug-and-play system",
-                "TypeScript support",
-                "Retro theme"
-            ]
-        }
+  "games": {
+    "2048": {
+      "name": "2048",
+      "description": "Classic 2048 game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "2048/index.html"
     },
-    "categories": {
-        "Arcade": {
-            "icon": "🕹️",
-            "color": "#dc2626"
-        },
-        "Puzzle": {
-            "icon": "🧩",
-            "color": "#7c3aed"
-        },
-        "Sports": {
-            "icon": "⚽",
-            "color": "#059669"
-        },
-        "Platform": {
-            "icon": "🦘",
-            "color": "#ea580c"
-        },
-        "Adventure": {
-            "icon": "🗺️",
-            "color": "#0891b2"
-        },
-        "Racing": {
-            "icon": "🏎️",
-            "color": "#c2410c"
-        },
-        "Instructions": {
-            "icon": "📚",
-            "color": "#6b7280"
-        }
+    "asteroids-generic": {
+      "name": "Asteroids Generic",
+      "description": "Classic asteroids generic game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "asteroids-generic/index.html"
     },
-    "ui_settings": {
-        "show_difficulty": true,
-        "show_categories": true,
-        "show_controls": true,
-        "grid_columns": 3,
-        "card_animation": true,
-        "ultra_dark_theme": true
+    "breakout": {
+      "name": "\ud83e\uddf1 Breakout",
+      "description": "Classic brick-breaking arcade game",
+      "category": "Arcade",
+      "icon": "\ud83e\uddf1",
+      "file": "breakout/index.html"
+    },
+    "breakout - Copy": {
+      "name": "Breakout   Copy",
+      "description": "Classic breakout   Copy game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "breakout - Copy/index.html"
+    },
+    "defender": {
+      "name": "Defender",
+      "description": "Classic defender game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "defender/index.html"
+    },
+    "froggy": {
+      "name": "Froggy",
+      "description": "Classic froggy game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "froggy/index.html"
+    },
+    "golf": {
+      "name": "Golf",
+      "description": "Classic golf game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "golf/index.html"
+    },
+    "js-sandbox": {
+      "name": "Js Sandbox",
+      "description": "Classic js sandbox game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "js-sandbox/index.html"
+    },
+    "moon": {
+      "name": "Moon",
+      "description": "Classic moon game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "moon/index.html"
+    },
+    "n": {
+      "name": "N",
+      "description": "Classic n game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "n/index.html"
+    },
+    "pacman-generic": {
+      "name": "Pacman Generic",
+      "description": "Classic pacman generic game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "pacman-generic/index.html"
+    },
+    "pong": {
+      "name": "\ud83c\udfd3 Pong",
+      "description": "Classic table tennis arcade game",
+      "category": "Sports",
+      "icon": "\ud83c\udfd3",
+      "file": "pong/index.html"
+    },
+    "pong-generic": {
+      "name": "Pong Generic",
+      "description": "Classic pong generic game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "pong-generic/index.html"
+    },
+    "snake-generic": {
+      "name": "Snake Generic",
+      "description": "Classic snake generic game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "snake-generic/index.html"
+    },
+    "space-generic": {
+      "name": "Space Generic",
+      "description": "Classic space generic game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "space-generic/index.html"
+    },
+    "space-invaders": {
+      "name": "\ud83d\udc7e Space Invaders",
+      "description": "Defend Earth from alien invasion",
+      "category": "Arcade",
+      "icon": "\ud83d\udc7e",
+      "file": "space-invaders/index.html"
+    },
+    "tetress": {
+      "name": "Tetress",
+      "description": "Classic tetress game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "tetress/index.html"
+    },
+    "tetress - Copy": {
+      "name": "Tetress   Copy",
+      "description": "Classic tetress   Copy game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "tetress - Copy/index.html"
+    },
+    "tetris": {
+      "name": "\ud83e\udde9 Tetris",
+      "description": "The ultimate tile-matching puzzle",
+      "category": "Puzzle",
+      "icon": "\ud83e\udde9",
+      "file": "tetris/index.html"
+    },
+    "tetris-generic-old": {
+      "name": "Tetris Generic Old",
+      "description": "Classic tetris generic old game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "tetris-generic-old/index.html"
+    },
+    "void": {
+      "name": "Void",
+      "description": "Classic void game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "void/index.html"
+    },
+    "void_vector": {
+      "name": "Void Vector",
+      "description": "Classic void_vector game",
+      "category": "Arcade",
+      "icon": "\ud83c\udfae",
+      "file": "void_vector/index.html"
     }
+  },
+  "categories": {
+    "Arcade": {
+      "icon": "\ud83d\udd79\ufe0f",
+      "color": "#dc2626"
+    },
+    "Puzzle": {
+      "icon": "\ud83e\udde9",
+      "color": "#7c3aed"
+    },
+    "Sports": {
+      "icon": "\u26bd",
+      "color": "#059669"
+    },
+    "Instructions": {
+      "icon": "\ud83d\udcda",
+      "color": "#6b7280"
+    }
+  },
+  "ui_settings": {
+    "show_difficulty": true,
+    "show_categories": true,
+    "show_controls": true,
+    "grid_columns": 3,
+    "card_animation": true,
+    "ultra_dark_theme": true
+  },
+  "scan_metadata": {
+    "last_scan": 1751115249.0009885,
+    "scan_timestamp": "2025-06-28 12:54:08",
+    "games_found": 22,
+    "games_list": [
+      "2048",
+      "asteroids-generic",
+      "breakout",
+      "breakout - Copy",
+      "defender",
+      "froggy",
+      "golf",
+      "js-sandbox",
+      "moon",
+      "n",
+      "pacman-generic",
+      "pong",
+      "pong-generic",
+      "snake-generic",
+      "space-generic",
+      "space-invaders",
+      "tetress",
+      "tetress - Copy",
+      "tetris",
+      "tetris-generic-old",
+      "void",
+      "void_vector"
+    ]
+  }
 }
