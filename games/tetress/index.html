@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetress - Enhanced Futuristic Tetris</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+            color: #ffffff;
+            font-family: 'Orbitron', 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+            padding: 10px;
+            
+            /* Performance optimizations */
+            image-rendering: pixelated;
+            backface-visibility: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .game-container {
+            display: flex;
+            gap: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            max-width: 95vw;
+            max-height: 95vh;
+            align-items: flex-start;
+            position: relative;
+            
+            /* Animation support */
+            transition: all 0.3s ease;
+        }
+
+        .game-container.shake {
+            animation: screenShake 0.1s ease-in-out;
+        }
+
+        @keyframes screenShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 120px;
+            min-width: 120px;
+        }
+
+        .game-area {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 160px;
+            min-width: 160px;
+        }
+
+        canvas {
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            background: #111111;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            display: block;
+            
+            /* Canvas optimizations */
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .main-canvas {
+            margin-bottom: 15px;
+        }
+
+        .info-panel {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .info-panel:hover {
+            background: rgba(0, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+        }
+
+        .info-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .info-panel:hover::before {
+            left: 100%;
+        }
+
+        .info-panel h3 {
+            color: #00ffff;
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-panel .value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .value.highlight {
+            color: #00ff66;
+            animation: valueGlow 0.5s ease-out;
+        }
+
+        @keyframes valueGlow {
+            0% { 
+                text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 20px rgba(0, 255, 102, 0.8);
+                transform: scale(1.1);
+            }
+            100% { 
+                text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+                transform: scale(1);
+            }
+        }
+
+        .next-piece-canvas, .hold-piece-canvas {
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 4px;
+            background: #0a0a0a;
+            display: block;
+            margin: 8px auto;
+            width: 100px;
+            height: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .next-piece-canvas:hover, .hold-piece-canvas:hover {
+            border-color: rgba(0, 255, 255, 0.6);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+
+        .timer-display {
+            display: none;
+        }
+
+        .debug-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 10px;
+            color: #666;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px;
+            border-radius: 3px;
+            max-width: 200px;
+            word-wrap: break-word;
+            font-family: 'Courier New', monospace;
+            line-height: 1.2;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Enhanced next queue display */
+        .next-queue {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            min-height: 300px;
+        }
+
+        .next-queue h3 {
+            color: #00ffff;
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .next-piece-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .next-piece-preview {
+            width: 100%;
+            height: 60px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 4px;
+            background: #0a0a0a;
+        }
+
+        .next-piece-preview:first-child {
+            height: 80px;
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        /* Modern scrollbar for debug info */
+        .debug-info::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .debug-info::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        .debug-info::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 255, 0.3);
+            border-radius: 2px;
+        }
+
+        .debug-info::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 255, 0.5);
+        }
+
+        /* Performance indicators */
+        .performance-indicator {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 10px;
+            color: #444;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .performance-indicator.good { color: #00ff00; }
+        .performance-indicator.warning { color: #ffff00; }
+        .performance-indicator.bad { color: #ff0000; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .game-container {
+                flex-direction: column;
+                padding: 15px;
+                gap: 15px;
+                max-width: 98vw;
+                max-height: 98vh;
+            }
+
+            .left-panel, .right-panel {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-around;
+                gap: 10px;
+            }
+
+            .info-panel {
+                flex: 1;
+                margin: 0 5px;
+                min-width: 80px;
+            }
+
+            canvas[data-canvas] {
+                width: 100%;
+                max-width: 350px;
+                height: auto;
+            }
+            
+            .next-piece-canvas, .hold-piece-canvas {
+                width: 60px !important;
+                height: 60px !important;
+            }
+
+            .debug-info {
+                position: relative;
+                width: 100%;
+                max-width: none;
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            canvas[data-canvas] {
+                max-width: 300px;
+            }
+            
+            .info-panel h3 {
+                font-size: 10px;
+            }
+            
+            .info-panel .value {
+                font-size: 12px;
+            }
+
+            .game-container {
+                padding: 10px;
+                gap: 10px;
+            }
+        }
+
+        /* Dark mode enhancements */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #000000 0%, #111111 100%);
+            }
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            .info-panel {
+                border: 2px solid #ffffff;
+                background: rgba(0, 0, 0, 0.8);
+            }
+            
+            .info-panel h3 {
+                color: #ffffff;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .info-panel::before {
+                display: none;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .game-container {
+                box-shadow: none;
+                border: 2px solid black;
+            }
+            
+            canvas {
+                border: 2px solid black;
+            }
+        }
+
+        /* Loading state */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 24px;
+            color: #00ffff;
+        }
+
+        .loading::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            margin-left: 10px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Focus indicators for accessibility */
+        .info-panel:focus,
+        canvas:focus {
+            outline: 2px solid #00ffff;
+            outline-offset: 2px;
+        }
+
+        /* Error state styling */
+        .error-state {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: rgba(255, 0, 0, 0.5);
+            color: #ff6666;
+        }
+
+        .error-state h3 {
+            color: #ff6666;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container" id="gameContainer">
+        <div class="left-panel">
+            <div class="info-panel">
+                <h3>Score</h3>
+                <div class="value" data-score>0</div>
+            </div>
+            <div class="info-panel">
+                <h3>Lines</h3>
+                <div class="value" data-lines>0</div>
+            </div>
+            <div class="info-panel">
+                <h3>Level</h3>
+                <div class="value" data-level>1</div>
+            </div>
+            <!-- Hold panel will be inserted here dynamically -->
+            <div class="info-panel timer-display" data-timer-display>
+                <h3>Time</h3>
+                <div class="value" data-timer>00:00.00</div>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <canvas class="main-canvas" data-canvas width="432" height="792"></canvas>
+            <div class="debug-info" data-debug style="display: none;"></div>
+            <div class="performance-indicator" id="perfIndicator" style="display: none;"></div>
+        </div>
+
+        <div class="right-panel">
+            <div class="info-panel next-queue">
+                <h3>Next</h3>
+                <canvas class="next-piece-canvas" data-next-canvas width="200" height="400"></canvas>
+            </div>
+            <div class="info-panel">
+                <h3>High Score</h3>
+                <div class="value" data-highscore>0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading screen -->
+    <div class="loading" id="loadingScreen" style="display: none;">
+        Loading Enhanced Tetress...
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    
+    <!-- Performance monitoring -->
+    <script>
+        // Basic performance monitoring
+        let frameCount = 0;
+        let lastTime = performance.now();
+        
+        function updatePerformance() {
+            frameCount++;
+            const now = performance.now();
+            
+            if (now - lastTime >= 1000) {
+                const fps = Math.round(frameCount * 1000 / (now - lastTime));
+                const perfIndicator = document.getElementById('perfIndicator');
+                
+                if (perfIndicator && perfIndicator.style.display !== 'none') {
+                    perfIndicator.textContent = `FPS: ${fps}`;
+                    
+                    // Color coding
+                    perfIndicator.className = 'performance-indicator ';
+                    if (fps >= 55) perfIndicator.className += 'good';
+                    else if (fps >= 30) perfIndicator.className += 'warning';
+                    else perfIndicator.className += 'bad';
+                }
+                
+                frameCount = 0;
+                lastTime = now;
+            }
+            
+            requestAnimationFrame(updatePerformance);
+        }
+        
+        // Start performance monitoring when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            requestAnimationFrame(updatePerformance);
+        });
+
+        // Enhanced error handling
+        window.addEventListener('error', (e) => {
+            console.error('Game error:', e.error);
+            
+            // Show user-friendly error message
+            const gameContainer = document.getElementById('gameContainer');
+            if (gameContainer) {
+                gameContainer.classList.add('error-state');
+                
+                // Remove error state after 5 seconds
+                setTimeout(() => {
+                    gameContainer.classList.remove('error-state');
+                }, 5000);
+            }
+        });
+
+        // Service worker registration for offline support (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

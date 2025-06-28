@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="game-container">
+        <div class="header">
+            <div class="score-display">
+                SCORE: <span class="score-value" data-score>0</span>
+            </div>
+            <div class="score-display" data-timer-display style="display: none;">
+                TIME: <span class="score-value" data-timer>00:00.00</span>
+            </div>
+            <div class="score-display">
+                HIGH: <span class="high-score-value" data-highscore>0</span>
+            </div>
+        </div>
+        <canvas data-canvas width="840" height="1280"></canvas>
+    </main>
+
+    <script src="./js/main.js" type="module"></script>
+</body>
+</html>
